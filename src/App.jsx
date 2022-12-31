@@ -1,8 +1,62 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 
 function App() {
-    const [count, setCount] = useState(0);
+    const slidervalue = useRef();
+    const [display, setDisplay] = useState(16);
+    const [isToggled, toggle] = useState(true);
+
+    const setInputValue = () => {
+        if (isToggled == true) {
+            if (
+                slidervalue.current.value >= 10 &&
+                slidervalue.current.value < 50
+            ) {
+                setDisplay(8);
+            } else if (
+                slidervalue.current.value >= 50 &&
+                slidervalue.current.value < 100
+            ) {
+                setDisplay(12);
+            } else if (
+                slidervalue.current.value >= 100 &&
+                slidervalue.current.value < 500
+            ) {
+                setDisplay(16);
+            } else if (
+                slidervalue.current.value >= 500 &&
+                slidervalue.current.value < 1000
+            ) {
+                setDisplay(24);
+            } else if (slidervalue.current.value >= 1000) {
+                setDisplay(36);
+            }
+        } else {
+            if (
+                slidervalue.current.value >= 10 &&
+                slidervalue.current.value < 50
+            ) {
+                setDisplay(6);
+            } else if (
+                slidervalue.current.value >= 50 &&
+                slidervalue.current.value < 100
+            ) {
+                setDisplay(9);
+            } else if (
+                slidervalue.current.value >= 100 &&
+                slidervalue.current.value < 500
+            ) {
+                setDisplay(12);
+            } else if (
+                slidervalue.current.value >= 500 &&
+                slidervalue.current.value < 1000
+            ) {
+                setDisplay(18);
+            } else if (slidervalue.current.value >= 1000) {
+                setDisplay(27);
+            }
+        }
+    };
 
     return (
         <div className="App">
@@ -19,22 +73,28 @@ function App() {
                     <div className="main-text">
                         <p>100K PAGEVIEWS</p>
                         <span className="price-month">
-                            <h1>$16.00</h1>
+                            <h1>${display}.00</h1>
                             <p>/month</p>
                         </span>
                     </div>
                     <div className="main-slider">
                         <input
+                            ref={slidervalue}
+                            onChange={setInputValue}
                             className="input-range"
                             min="1"
-                            max="100"
+                            max="1000"
                             type="range"
                         />
 
                         <div className="secondary-text">
                             <p>monthly billing</p>
+
                             <label class="switch">
-                                <input type="checkbox" checked />
+                                <input
+                                    type="checkbox"
+                                    onClick={() => toggle(!isToggled)}
+                                />
                                 <span class="slider round"></span>
                             </label>
                             <p>Yearly Billing</p>
