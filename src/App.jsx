@@ -41,6 +41,7 @@ function App() {
                             <p className="discount">25% discount</p>
                         </div>
                     </div>
+                    <div className="divider"></div>
                     <div className="third-comp">
                         <ul className="trial">
                             <li>Unlimited websites</li>
